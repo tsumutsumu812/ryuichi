@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <title>newChart</title>
+</head>
+<style>
+    table{
+        border: 1px solid rgb(0, 82, 177)
+    }
+    th{
+        border: 1px solid #000
+    }
+    td{
+        border: 1px solid #000
+    }
+    .chartSize{
+        height:500px;
+        width:500px;
+    }
+    span{
+        background-color:rgb(252, 255, 46);
+    }
+</style>
+<body>
+    <div id="app">
+        <h2>LOVEテスター</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>問1</th>
+                    <th>問2</th>
+                    <th>問3</th>
+                    <th>問4</th>
+                    <th>問5</th>
+                    <th class="sum"><span>カバレッジ</span></th>
+                    <th>問6</th>
+                    <th>問7</th>
+                    <th>問8</th>
+                    <th>問9</th>
+                    <th>問10</th>
+                    <th class="sum"><span>LOB</span></th>
+                    <th>問11</th>
+                    <th>問12</th>
+                    <th>問13</th>
+                    <th>問14</th>
+                    <th>問15</th>
+                    <th class="sum"><span>リレーション</span></th>
+                    <th>合計</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td class="total"><span>18</span></td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td class="total"><span>12</span></td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>8</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td class="total"><span>24</span></td>
+                    <td>54</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td class="total2"><span>30</span></td>
+                    <td>0</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>6</td>
+                    <td>0</td>
+                    <td class="total2"><span>18</span></td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>8</td>
+                    <td>0</td>
+                    <td class="total2"><span>16</span></td>
+                    <td>64</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="chartSize">
+            <canvas id="myChart" style="position: relative; height:100; width:150"></canvas>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+    <script src="../jquery.min.js"></script>
+<script>
+    var array1 = []
+    var array2 = []
+    var array3 = []
+    $('.sum').each(function(){
+        var item = $(this).find('span').text()
+        array1.push(item)
+    })
+    $('.total').each(function(){
+        var number = $(this).find('span').text()
+        array2.push(number)
+    })
+    $('.total2').each(function(){
+        var numberx = $(this).find('span').text()
+        array3.push(numberx)
+    })
+    var app = new Vue({
+        el:"#app",
+        data:{
+            first:10,
+            second:20,
+            third:20,
+            fourth:28
+        }
+    })
+    var newChart = {
+        type:"radar",
+        data:{
+            labels:array1,
+            datasets:[{
+                label:"No1",
+                backgroundColor:'rgba(255, 98, 98 ,.5)',
+                borderColor:'rgb(255, 32, 32)',
+                pointBackgroundColor:'rgb(99, 32, 255)',
+                data:array2
+            },{
+                label:"No2",
+                backgroundColor:'rgba(49, 145, 255,.5)',
+                borderColor:'rgb(49, 145, 255)',
+                pointBackgroundColor:'rgb(0, 82, 177)',
+                data:array3
+            }]
+        },
+        options:{
+            scale:{
+                display:true,
+                pointLabels: {
+				fontSize: 15,
+				fontColor: 'rgb(255, 207, 49)'
+		    	},
+                ticks:{
+                    display:true,
+                    fontSize:14,
+                    fontColor:'rgb(49, 145, 255)',
+                    min:0,
+                    max:40,
+                    beginAtZero:true
+                },
+                gridLines:{
+                    display:true,
+                    color:'rgb(255, 207, 49)',
+                }
+            }
+        }
+        
+    }
+    var myRadar = new Chart($("#myChart"), newChart);
+</script>   
+    
+</body>
+</html>
